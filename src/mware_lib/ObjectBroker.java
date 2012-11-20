@@ -1,6 +1,6 @@
 package mware_lib;
 
-public abstract class ObjectBroker {
+public class ObjectBroker {
 
 	// Das hier zurückgelieferte Objekt soll der zentrale Einstiegspunkt
 	// der Middleware aus Anwendersicht sein.
@@ -8,13 +8,13 @@ public abstract class ObjectBroker {
 	// kontaktiert werden sollen.
 	public static ObjectBroker getBroker(String serviceHost, int listenPort) { 
 		
-			return new Object();
+			return null;
 			}
 	// Liefert den Namensdienst (Stellvetreterobjekt).
 	public NameService getNameService() {
 			
 		
-		return new NameService();
+		return null;
 	}
 		
 	
