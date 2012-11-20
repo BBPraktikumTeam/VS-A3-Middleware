@@ -8,13 +8,13 @@ public abstract class ObjectBroker {
 	// kontaktiert werden sollen.
 	public static ObjectBroker getBroker(String serviceHost, int listenPort) { 
 		
-			return new ObjectBroker();
+			return null;
 			}
 	// Liefert den Namensdienst (Stellvetreterobjekt).
 	public NameService getNameService() {
 			
 		
-		return new NameService();
+		return null;
 	}
 		
 	
