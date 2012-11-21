@@ -27,23 +27,12 @@ final class NameServiceStub extends NameService {
 	@Override
 	public void rebind(Object servant, String name) {
 		// String type=servant.getClass().toString();
-		String type = "java.lang.Object";
-		Class<?> clazz = servant.getClass();
-		while (clazz.getSuperclass() != null) {
-			if (clazz.toString().equals("class branch_access.Manager")) {
-				type = "branch_access.Manager";
-				break;
-			} else if (clazz.toString().equals("class cash_access.Account")) {
-				type = "cash_access.Account";
-				break;
-			}
-			clazz = clazz.getSuperclass();
-		}
+		String type = Utilities.getTypeForObject(servant);
 		String host = socket.getLocalAddress().getHostAddress();
 		String port = String.valueOf(socket.getLocalPort());
-		System.out.println("try to rebind: " + name + "," + type + "," + host
-				+ "," + port);
-		out.println("rebind," + name + "," + type + "," + host + "," + port);
+		String message=Utilities.join(",","rebind",name ,type, host,port);
+		System.out.println("try to rebind: " + message);
+		out.println(message);
 		try {
 			System.out.println("ns: " + in.readLine());
 		} catch (IOException e) {
