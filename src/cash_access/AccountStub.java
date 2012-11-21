@@ -2,8 +2,8 @@ package cash_access;
 
 public final class AccountStub extends Account {
 
-	public AccountStub(String Name, String Host, int port) {
-	}
+//	public AccountStub(String Name, String Host, int port) {
+//	}
 	
 	@Override
 	public void deposit(double amount) {

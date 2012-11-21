@@ -64,9 +64,9 @@ final class NameServiceStub extends NameService {
 	static Object createStub(String type, String host, int port) {
 		Object result = null;
 		if (type.equals("branch_access.Manager")) {
-			result = new branch_access.ManagerDummy();
+			result = new branch_access.ManagerStub();
 		} else if (type.equals("cash_access.Account")) {
-			result = new cash_access.AccountDummy();
+			result = new cash_access.AccountStub();
 		} else {
 			result = new Object();
 		}
