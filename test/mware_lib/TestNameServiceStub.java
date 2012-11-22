@@ -44,11 +44,11 @@ public class TestNameServiceStub {
 		assertEquals("class java.lang.Object", obj.getClass().toString());
 	}
 	
-	@Test
-	public void manager() {
-		nss.rebind(new branch_access.ManagerDummy(), "name2");
-		Object obj = nss.resolve("name2");
-		assertEquals("class branch_access.ManagerStub", obj.getClass().toString());
-	}
+//	@Test
+//	public void manager() {
+//		nss.rebind(new branch_access.ManagerDummy(), "name2");
+//		Object obj = nss.resolve("name2");
+//		assertEquals("class branch_access.ManagerStub", obj.getClass().toString());
+//	}
 	
 }

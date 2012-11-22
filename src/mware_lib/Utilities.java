@@ -32,4 +32,25 @@ public class Utilities {
 		}
 		return result;
 	}
+
+	static Object createProxy(String name, String type, String host, int port) {
+		Object result = null;
+		final Class<?>[] EMPTY_CLASS_ARRAY = new Class<?>[0];
+		final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+		try {
+			if (type.equals("branch_access.Manager")) {
+				result = Class.forName("branch_access.ManagerStub")
+						.getConstructor(EMPTY_CLASS_ARRAY)
+						.newInstance(EMPTY_OBJECT_ARRAY);
+			} else if (type.equals("cash_access.Account")) {
+				result = Class.forName("cash_access.AccountStub")
+						.getConstructor(EMPTY_CLASS_ARRAY)
+						.newInstance(EMPTY_OBJECT_ARRAY);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException();
+		}
+		return result;
+	}
+
 }

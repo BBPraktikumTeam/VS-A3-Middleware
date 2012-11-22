@@ -54,23 +54,12 @@ final class NameServiceStub extends NameService {
 		if (resultLine[0].equals("result")) {
 			System.out.println("ns: " + resultLine[1] + "," + resultLine[2]
 					+ "," + resultLine[3] + "," + resultLine[4]);
-			result = createStub(resultLine[2],resultLine[3],Integer.parseInt(resultLine[4]));
+			result = Utilities.createProxy(resultLine[1],resultLine[2],resultLine[3],Integer.parseInt(resultLine[4]));
 		} else {
 			System.out.println("ns: " + resultLine[0]);
 		}
 		return result;
 	}
 
-	static Object createStub(String type, String host, int port) {
-		Object result = null;
-		if (type.equals("branch_access.Manager")) {
-			result = new branch_access.ManagerStub();
-		} else if (type.equals("cash_access.Account")) {
-			result = new cash_access.AccountStub();
-		} else {
-			result = new Object();
-		}
-		return result;
-	}
 
 }

@@ -4,17 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import branch_access.ManagerStub;
-
-import cash_access.AccountDummy;
-
 public class UtilitiesTest {
-
-	@Test
-	public void testGetTypeForObject() {
-		assertEquals("cash_access.Account",Utilities.getTypeForObject(new AccountDummy()));
-		assertEquals("branch_access.Manager",Utilities.getTypeForObject(new ManagerStub()));
-	}
 
 	@Test
 	public void testJoin() {
