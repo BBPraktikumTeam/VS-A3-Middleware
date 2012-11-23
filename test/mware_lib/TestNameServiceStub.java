@@ -13,10 +13,10 @@ public class TestNameServiceStub {
 
 	private static final String NS_HOST = "localhost";
 	private static final int NS_PORT = 6666;
-	
+
 	private static NameServiceStub nss = null;
 	private static Socket socket = null;
-	
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		try {
@@ -43,12 +43,13 @@ public class TestNameServiceStub {
 		Object obj = nss.resolve("name1");
 		assertEquals("class java.lang.Object", obj.getClass().toString());
 	}
-	
-//	@Test
-//	public void manager() {
-//		nss.rebind(new branch_access.ManagerDummy(), "name2");
-//		Object obj = nss.resolve("name2");
-//		assertEquals("class branch_access.ManagerStub", obj.getClass().toString());
-//	}
-	
+
+	// @Test
+	// public void manager() {
+	// nss.rebind(new branch_access.ManagerDummy(), "name2");
+	// Object obj = nss.resolve("name2");
+	// assertEquals("class branch_access.ManagerStub",
+	// obj.getClass().toString());
+	// }
+
 }

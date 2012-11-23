@@ -4,15 +4,27 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class CommunicatorServer {
+public class CommunicatorLauncher extends Thread {
 
-	private final int SERVER_PORT = 6666;
+	private final static int DEFAULT_SERVER_PORT = 6667;
+	private final ServerSocket serverSocket;
 
-	public CommunicatorServer() {
-		int port = SERVER_PORT;
+	public CommunicatorLauncher() {
+		this(DEFAULT_SERVER_PORT);
+	}
+
+	public CommunicatorLauncher(int port) {
 		ServerSocket serverSocket = null;
 		try {
 			serverSocket = new ServerSocket(port);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		this.serverSocket = serverSocket;
+	}
+
+	public void run() {
+		try {
 			while (true) {
 				Socket socket = serverSocket.accept();
 				Communicator comm = new Communicator(socket);
@@ -23,5 +35,6 @@ public class CommunicatorServer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 	}
 }

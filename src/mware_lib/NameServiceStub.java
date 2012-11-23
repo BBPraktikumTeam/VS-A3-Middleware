@@ -30,13 +30,19 @@ final class NameServiceStub extends NameService {
 		String type = Utilities.getTypeForObject(servant);
 		String host = socket.getLocalAddress().getHostAddress();
 		String port = String.valueOf(socket.getLocalPort());
-		String message=Utilities.join(",","rebind",name ,type, host,port);
+		String message = Utilities.join(",", "rebind", name, type, host, port);
 		System.out.println("try to rebind: " + message);
 		out.println(message);
+		String result = null;
 		try {
-			System.out.println("ns: " + in.readLine());
-		} catch (IOException e) {
-			e.printStackTrace();
+			result = in.readLine();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		System.out.println("ns: " + result);
+		if (result.equals("ok")) {
+			Skeleton skel = Utilities.createSkeleton(name, servant);
+			SkeletonBindings.addSkeleton(skel);
 		}
 	}
 
@@ -54,12 +60,12 @@ final class NameServiceStub extends NameService {
 		if (resultLine[0].equals("result")) {
 			System.out.println("ns: " + resultLine[1] + "," + resultLine[2]
 					+ "," + resultLine[3] + "," + resultLine[4]);
-			result = Utilities.createProxy(resultLine[1],resultLine[2],resultLine[3],Integer.parseInt(resultLine[4]));
+			result = Utilities.createProxy(resultLine[1], resultLine[2],
+					resultLine[3], Integer.parseInt(resultLine[4]));
 		} else {
 			System.out.println("ns: " + resultLine[0]);
 		}
 		return result;
 	}
-
 
 }

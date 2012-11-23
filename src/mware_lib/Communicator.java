@@ -24,6 +24,7 @@ public final class Communicator extends Thread {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("mw: create new communicator (client)");
 		this.socket = socket;
 		this.out = out;
 		this.in = in;
@@ -39,13 +40,18 @@ public final class Communicator extends Thread {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("mw: create new communicator (server)");
 		this.socket = socket;
 		this.out = out;
 		this.in = in;
 	}
 
-	public InetSocketAddress socketAddress() {
+	public InetSocketAddress remoteAddress() {
 		return new InetSocketAddress(socket.getInetAddress(), socket.getPort());
+	}
+
+	public InetSocketAddress localAddress() {
+		return new InetSocketAddress(socket.getLocalAddress(), socket.getLocalPort());
 	}
 
 	public void send(String msg) {

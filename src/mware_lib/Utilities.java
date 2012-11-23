@@ -1,5 +1,7 @@
 package mware_lib;
 
+import java.net.InetSocketAddress;
+
 public class Utilities {
 
 	private Utilities() {
@@ -35,22 +37,55 @@ public class Utilities {
 
 	static Object createProxy(String name, String type, String host, int port) {
 		Object result = null;
-		final Class<?>[] EMPTY_CLASS_ARRAY = new Class<?>[0];
-		final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 		try {
+			final Class<?>[] CONSTRUCTOR_SIGNATURE = {
+					Class.forName("java.lang.String"),
+					Class.forName("java.net.InetSocketAddress") };
+			final Object[] CONSTRUCTOR_ARGS = { "name",
+					InetSocketAddress.createUnresolved("localhost", 1234) };
 			if (type.equals("branch_access.Manager")) {
-				result = Class.forName("branch_access.ManagerStub")
-						.getConstructor(EMPTY_CLASS_ARRAY)
-						.newInstance(EMPTY_OBJECT_ARRAY);
+				result = Class.forName("branch_access.ManagerProxy")
+						.getConstructor(CONSTRUCTOR_SIGNATURE)
+						.newInstance(CONSTRUCTOR_ARGS);
 			} else if (type.equals("cash_access.Account")) {
-				result = Class.forName("cash_access.AccountStub")
-						.getConstructor(EMPTY_CLASS_ARRAY)
-						.newInstance(EMPTY_OBJECT_ARRAY);
+				result = Class.forName("cash_access.AccountProxy")
+						.getConstructor(CONSTRUCTOR_SIGNATURE)
+						.newInstance(CONSTRUCTOR_ARGS);
 			}
 		} catch (Exception e) {
+			// e.printStackTrace();
 			throw new RuntimeException();
 		}
 		return result;
 	}
 
+	static Skeleton createSkeleton(String name, Object servant) {
+		Object result = null;
+		String type = getTypeForObject(servant);
+		try {
+			if (type.equals("branch_access.Manager")) {
+				final Class<?>[] CONSTRUCTOR_SIGNATURE = {
+						Class.forName("java.lang.String"),
+						Class.forName("branch_access.Manager") };
+				final Object[] CONSTRUCTOR_ARGS = { name,
+						Class.forName("branch_access.Manager").cast(servant)};
+				result = Class.forName("branch_access.ManagerSkeleton")
+						.getConstructor(CONSTRUCTOR_SIGNATURE)
+						.newInstance(CONSTRUCTOR_ARGS);
+			} else if (type.equals("cash_access.Account")) {
+				final Class<?>[] CONSTRUCTOR_SIGNATURE = {
+						Class.forName("java.lang.String"),
+						Class.forName("cash_access.Account") };
+				final Object[] CONSTRUCTOR_ARGS = { name,
+						Class.forName("cash_access.Account").cast(servant)};
+				result = Class.forName("cash_access.AccountSkeleton")
+						.getConstructor(CONSTRUCTOR_SIGNATURE)
+						.newInstance(CONSTRUCTOR_ARGS);
+			}
+		} catch (Exception e) {
+			 e.printStackTrace();
+			throw new RuntimeException();
+		}
+		return (Skeleton)result;
+	}
 }
