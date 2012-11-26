@@ -64,6 +64,7 @@ final class NameServiceStub extends NameService {
 					resultLine[3], Integer.parseInt(resultLine[4]));
 		} else {
 			System.out.println("ns: " + resultLine[0]);
+			//TODO: Exception werfen
 		}
 		return result;
 	}
