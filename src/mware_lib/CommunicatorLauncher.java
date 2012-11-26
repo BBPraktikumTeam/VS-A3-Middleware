@@ -8,6 +8,7 @@ public class CommunicatorLauncher extends Thread {
 
 	private final static int DEFAULT_SERVER_PORT = 6667;
 	private final ServerSocket serverSocket;
+	private static CommunicatorLauncher cl;
 
 	public CommunicatorLauncher() {
 		this(DEFAULT_SERVER_PORT);
@@ -23,6 +24,7 @@ public class CommunicatorLauncher extends Thread {
 		this.serverSocket = serverSocket;
 	}
 
+	@Override
 	public void run() {
 		try {
 			while (true) {
@@ -34,7 +36,13 @@ public class CommunicatorLauncher extends Thread {
 
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		} 
+	}
 
+	public static void init() {
+		if (cl == null) {
+			cl = new CommunicatorLauncher();
+			cl.start();
+		}
 	}
 }

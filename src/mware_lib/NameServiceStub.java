@@ -26,6 +26,7 @@ final class NameServiceStub extends NameService {
 
 	@Override
 	public void rebind(Object servant, String name) {
+		CommunicatorLauncher.init();
 		// String type=servant.getClass().toString();
 		String type = Utilities.getTypeForObject(servant);
 		String host = socket.getLocalAddress().getHostAddress();
