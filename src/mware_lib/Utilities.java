@@ -36,6 +36,7 @@ public class Utilities {
 	}
 
 	static Object createProxy(String name, String type, String host, int port) {
+		System.out.println("Creating proxy for "+name+" "+type+" "+host+" "+port);
 		Object result = null;
 		try {
 			final Class<?>[] CONSTRUCTOR_SIGNATURE = {
@@ -53,7 +54,7 @@ public class Utilities {
 						.newInstance(CONSTRUCTOR_ARGS);
 			}
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			throw new RuntimeException();
 		}
 		return result;

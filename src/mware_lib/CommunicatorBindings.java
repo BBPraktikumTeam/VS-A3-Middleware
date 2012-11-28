@@ -14,6 +14,8 @@ public final class CommunicatorBindings {
 			communicators.put(dest, comm);
 			comm.start();
 		}
+		System.out.println("Communicators: " + communicators);
+		System.out.println("CommBindings: Returning Communicator Object");
 		return comm;
 	}
 

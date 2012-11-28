@@ -7,6 +7,7 @@ public final class ReplyMessageQueue {
 	private static Map<Long, ReplyMessage> messages = new HashMap<Long, ReplyMessage>();
 
 	public synchronized static void put(ReplyMessage msg) {
+		System.out.println("Received message:" +msg);
 		messages.put(msg.messageId(), msg);
 	}
 
