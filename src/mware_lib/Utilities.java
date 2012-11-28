@@ -41,8 +41,8 @@ public class Utilities {
 			final Class<?>[] CONSTRUCTOR_SIGNATURE = {
 					Class.forName("java.lang.String"),
 					Class.forName("java.net.InetSocketAddress") };
-			final Object[] CONSTRUCTOR_ARGS = { "name",
-					InetSocketAddress.createUnresolved("localhost", 1234) };
+			final Object[] CONSTRUCTOR_ARGS = { name,
+					new InetSocketAddress(host, port) };
 			if (type.equals("branch_access.Manager")) {
 				result = Class.forName("branch_access.ManagerProxy")
 						.getConstructor(CONSTRUCTOR_SIGNATURE)

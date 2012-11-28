@@ -8,6 +8,7 @@ public class CommunicatorLauncher extends Thread {
 
 	private final static int DEFAULT_SERVER_PORT = 6667;
 	private final ServerSocket serverSocket;
+	private static int serverPort;
 	private static CommunicatorLauncher cl;
 
 	public CommunicatorLauncher() {
@@ -21,6 +22,7 @@ public class CommunicatorLauncher extends Thread {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		serverPort = port;
 		this.serverSocket = serverSocket;
 	}
 
@@ -36,7 +38,7 @@ public class CommunicatorLauncher extends Thread {
 
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	public static void init() {
@@ -44,5 +46,9 @@ public class CommunicatorLauncher extends Thread {
 			cl = new CommunicatorLauncher();
 			cl.start();
 		}
+	}
+
+	public static int serverPort() {
+		return serverPort;
 	}
 }

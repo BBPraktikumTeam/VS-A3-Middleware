@@ -13,4 +13,8 @@ final class SkeletonBindings {
 	static Skeleton getSkeleton(String name) {
 		return localSkeletons.get(name);
 	}
+	
+	static int numberOfSkeletonBindings() {
+		return localSkeletons.size();
+	}
 }

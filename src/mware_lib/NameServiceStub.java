@@ -30,7 +30,7 @@ final class NameServiceStub extends NameService {
 		// String type=servant.getClass().toString();
 		String type = Utilities.getTypeForObject(servant);
 		String host = socket.getLocalAddress().getHostAddress();
-		String port = String.valueOf(socket.getLocalPort());
+		String port = String.valueOf(CommunicatorLauncher.serverPort());
 		String message = Utilities.join(",", "rebind", name, type, host, port);
 		System.out.println("try to rebind: " + message);
 		out.println(message);

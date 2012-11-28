@@ -11,7 +11,7 @@ public final class Communicator extends Thread {
 	private final Socket socket;
 	private final PrintWriter out;
 	private final BufferedReader in;
-	
+
 	public Communicator(InetSocketAddress address) {
 		Socket socket = null;
 		PrintWriter out = null;
@@ -51,10 +51,17 @@ public final class Communicator extends Thread {
 	}
 
 	public InetSocketAddress localAddress() {
-		return new InetSocketAddress(socket.getLocalAddress(), socket.getLocalPort());
+		return new InetSocketAddress(socket.getLocalAddress(),
+				socket.getLocalPort());
+	}
+
+	public String toString() {
+		return "Communicator: local:" + localAddress() + ", remote:"
+				+ remoteAddress();
 	}
 
 	public void send(String msg) {
+		System.out.println("sending: " + msg);
 		out.println(msg);
 	}
 
@@ -63,13 +70,18 @@ public final class Communicator extends Thread {
 		try {
 			System.out.println("Communicator started");
 			while (!socket.isClosed() && ((inputLine = in.readLine()) != null)) {
-				Dispatcher.dispatch(inputLine, this);
+				System.out.println("receive: " + inputLine);
+				if (inputLine.startsWith("request")) {
+					Dispatcher.dispatch(inputLine, this);
+				} else {
+					Dispatcher.dispatch(inputLine);
+				}
 			}
 			in.close();
 			out.close();
 			socket.close();
 		} catch (IOException e) {
-//			e.printStackTrace();
+			// e.printStackTrace();
 		} finally {
 			System.out.println("Communicator stopped");
 		}
