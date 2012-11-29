@@ -33,6 +33,7 @@ public class CommunicatorLauncher extends Thread {
 				Socket socket = serverSocket.accept();
 				Communicator comm = new Communicator(socket);
 				CommunicatorBindings.addCommunicator(comm);
+				comm.setDaemon(true);
 				comm.start();
 			}
 
@@ -44,6 +45,7 @@ public class CommunicatorLauncher extends Thread {
 	public static void init() {
 		if (cl == null) {
 			cl = new CommunicatorLauncher();
+			cl.setDaemon(true);
 			cl.start();
 		}
 	}

@@ -12,6 +12,7 @@ public final class CommunicatorBindings {
 		if (comm == null) {
 			comm = new Communicator(dest);
 			communicators.put(dest, comm);
+			comm.setDaemon(true);
 			comm.start();
 		}
 		System.out.println("Communicators: " + communicators);
